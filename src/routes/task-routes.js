@@ -1,6 +1,6 @@
 const taskRouter = require("express").Router();
 const Task = require("../models/TaskModel");
-const auth = require("../middleware/auth");
+
 
 taskRouter.post("/tasks", async (req, res) => {
   const task = new Task(req.body);
@@ -15,7 +15,7 @@ taskRouter.post("/tasks", async (req, res) => {
   }
 });
 
-taskRouter.get("/tasks", auth ,async (req, res) => {
+taskRouter.get("/tasks", async (req, res) => {
   try {
     const allTasks = await Task.find({});
 
