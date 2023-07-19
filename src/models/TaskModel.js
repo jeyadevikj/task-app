@@ -12,14 +12,10 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    email: {
-        type: String,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('Invalid Email!')
-            }
-        }
+        ref: 'User'
     }
 })
 

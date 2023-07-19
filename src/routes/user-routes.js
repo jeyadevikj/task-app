@@ -51,10 +51,7 @@ userRouter.post('/users/login', async (req, res) => {
 
 userRouter.delete('/users/me', auth, async (req, res) => {
     try {
-        const deletedUser = await User.findByIdAndDelete(req.user._id)
-        if (!deletedUser) {
-            throw new Error('No user found')
-        }
+        await req.user.deleteOne()
 
         return res.status(200).send({ message: 'User deleted successfully' })
     } catch (error) {
@@ -63,7 +60,7 @@ userRouter.delete('/users/me', auth, async (req, res) => {
 })
 
 userRouter.patch('/users/me', auth, async (req, res) => {
-    const updatesPassed = Object.keys(req.body) 
+    const updatesPassed = Object.keys(req.body)
     const updatesAllowed = ["name", "password", "email"]
 
     try {

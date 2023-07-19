@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const dbName = 'tasks'
+const dbName = 'task-manager'
 const connectionUrl = 'mongodb+srv://shanerex:MV4DuPaU54WvyuiK@cluster0.buv8ju3.mongodb.net/?retryWrites=true&w=majority/'
 
 async function dbInit() {

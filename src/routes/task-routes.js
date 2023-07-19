@@ -1,9 +1,14 @@
 const taskRouter = require("express").Router();
 const Task = require("../models/TaskModel");
+const auth = require('../middleware/auth')
 
 
-taskRouter.post("/tasks", async (req, res) => {
-  const task = new Task(req.body);
+taskRouter.post("/tasks", auth, async (req, res) => {
+  const task = new Task({
+    ...req.body,
+    owner: req.user._id
+  });
+
   try {
     const insertedTask = await task.save();
 
@@ -15,30 +20,37 @@ taskRouter.post("/tasks", async (req, res) => {
   }
 });
 
-taskRouter.get("/tasks", async (req, res) => {
+taskRouter.get("/tasks", auth, async (req, res) => {
   try {
-    const allTasks = await Task.find({});
-
-    return res.status(200).json(allTasks);
+    // const allTasks = await Task.find({owner: req.user._id});
+    await req.user.populate('tasks')
+    if(!req.user.tasks) {
+      throw new Error('No tasks found for user')
+    }
+    return res.status(200).json(req.user.tasks);
   } catch (error) {
-    console.error(error.message);
+    // console.error(error.message);
     return res.status(404).json({ message: error.message });
   }
 });
 
-taskRouter.get("/tasks/:id", async (req, res) => {
-  const id = req.params.id;
+taskRouter.get("/tasks/:id", auth, async (req, res) => {
+  const _id = req.params.id;
   try {
-    const tasks = await Task.findById(id);
-
-    return res.status(200).json(tasks);
+    const task = await Task.findOne({ _id, owner: req.user._id })
+    if (!task) {
+      throw new Error('Passed wrong id or user may not have the task')
+    }
+    return res.status(200).json(task);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
 });
 
-taskRouter.patch("/tasks/:id", async (req, res) => {
-  const id = req.params.id;
+taskRouter.patch("/tasks/:id", auth ,async (req, res) => {
+  const _id = req.params.id;
+
+
   const updates = req.body;
   const updatesPassed = Object.keys(updates);
   const allowedUpdates = ["description", "completed", "email"];
@@ -55,7 +67,7 @@ taskRouter.patch("/tasks/:id", async (req, res) => {
     //     update,
     //     { new: true, runValidators: true }
     // )
-    const task = await Task.findById(id);
+    const task = await Task.findOne({_id, owner: req.user._id});
 
     if (!task) {
       return res.status(404).send({ message: "Document not found" });
@@ -71,10 +83,10 @@ taskRouter.patch("/tasks/:id", async (req, res) => {
   }
 });
 
-taskRouter.delete("/tasks/:id", async (req, res) => {
-  const id = req.params.id;
+taskRouter.delete("/tasks/:id", auth ,async (req, res) => {
+  const _id = req.params.id;
   try {
-    const deletedUser = await Task.findByIdAndDelete(id);
+    const deletedUser = await Task.findOneAndDelete({_id, owner: req.user._id});
 
     if (!deletedUser) {
       return res.status(404).send({ message: "No user found" });
