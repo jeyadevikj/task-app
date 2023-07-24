@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
             if (value.length < 6) {
                 throw new Error('Invalid password length')
             }
-            if (value === 'password') {
+            if (value === 'password') { 
                 throw new Error('Invalid password string')
             }
         }

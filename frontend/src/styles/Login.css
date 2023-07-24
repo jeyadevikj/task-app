@@ -1,0 +1,13 @@
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.form-content {
+    border: 1px solid #BBC6D7;
+    border-radius: 1rem;
+    padding: 4rem;
+    box-shadow: 0 0.2rem 0.4rem 0 #BBC6D7;
+}

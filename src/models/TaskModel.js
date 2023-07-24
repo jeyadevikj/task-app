@@ -12,6 +12,10 @@ const taskSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    hasPriority: {
+        type: Boolean,
+        default: false
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

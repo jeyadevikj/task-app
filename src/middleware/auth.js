@@ -2,9 +2,11 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/UserModel')
 
 const auth = async (req, res, next) => {
-    const headers = req.header('authorization').split(' ')
-    const token = headers[1]
+    const token = req.cookies.token
     try {
+        if(!token) {
+            throw new Error('No auth token found')
+        }
         const decodedCredentials = jwt.verify(token, 'cssr')
         const user = await User.findOne({_id: decodedCredentials.id, 'tokens.token': token})
         if(!user) {

@@ -27,7 +27,12 @@ userRouter.post('/users/register', async (req, res) => {
             return res.status(400).json({ message: 'Unable to insert user' })
         }
         const token = await insertedUser.generateAuthToken(secretKey)
-        return res.status(201).json({ insertedUser, token })
+        res.cookie('token', token, {
+            maxAge: 18000000,
+            httpOnly: true,
+            secure: true
+        })
+        return res.status(201).json({ insertedUser })
     } catch (error) {
         return res.status(400).json({ message: error.message })
     }
@@ -43,7 +48,12 @@ userRouter.post('/users/login', async (req, res) => {
             return res.status(404).json({ message: 'Could not find user' })
         }
         const token = await user.generateAuthToken(secretKey)
-        return res.status(200).json({ user, token })
+        res.cookie('token', token, {
+            maxAge: 18000000,
+            httpOnly: true,
+            secure: true
+        })
+        return res.status(200).json({ user })
     } catch (error) {
         return res.status(404).json({ message: error.message })
     }
