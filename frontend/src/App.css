@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
 .App {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
   font-family: 'Poppins';
   text-align: center;
 }

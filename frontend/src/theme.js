@@ -4,25 +4,32 @@ const theme = createTheme({
     typography: {
         fontFamily: "Poppins",
         h1: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         h2: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         h3: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         h4: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         h5: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         h6: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         subtitle1: {
-            color: "#26282E"
+            color: "#26282E",
+            fontWeight: "bold"
         },
         body1: {
             color: "#B0BCCE"
