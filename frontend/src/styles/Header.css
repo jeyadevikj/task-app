@@ -3,9 +3,5 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.4rem;
-}
-
-.header:hover {
     box-shadow: 0 0.2rem 0.4rem 0 #BBC6D7;
-    transition: 500ms;
 }

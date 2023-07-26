@@ -1,22 +1,25 @@
-import { AddBoxOutlined, ArrowBackIosNewOutlined, ArrowForwardIosOutlined, HomeOutlined, MoreHorizOutlined, PermIdentity } from "@mui/icons-material"
-import { Badge, Box, Button, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material"
+import { AddBoxOutlined, HomeOutlined, MoreHorizOutlined, PermIdentity } from "@mui/icons-material"
+import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material"
 import "../styles/SideBar.css"
 import theme from "../theme"
-import { useState } from "react"
 
-const SideBar = () => {
+const SideBar = ({ expanded }) => {
     const categories = ['Home', 'Project 1', 'Project 2']
     const hoverProperties = {
         "&:hover": {
             backgroundColor: theme.palette.selected.main
         },
     }
-    const [expanded, setExpandedState] = useState(true)
     return (
         <>
-            {expanded ? (
             <Box className="sidebar">
-                    <Box className="sidebar-top">
+                <Drawer variant="permanent" sx={{
+                    [`& .MuiDrawer-paper`]: {
+                        width: '18vw',
+                        position: "relative",
+                    }
+                }}>
+                    <Box>
                         <List>
                             <ListItem disablePadding sx={hoverProperties}>
                                 <ListItemButton>
@@ -24,7 +27,7 @@ const SideBar = () => {
                                         <HomeOutlined />
                                     </ListItemIcon>
                                     <ListItemText>
-                                        <Typography variant="body1">
+                                        <Typography variant="body2">
                                             Home
                                         </Typography>
                                     </ListItemText>
@@ -36,25 +39,20 @@ const SideBar = () => {
                                         <PermIdentity />
                                     </ListItemIcon>
                                     <ListItemText>
-                                        <Typography variant="body1">
+                                        <Typography variant="body2">
                                             Profile
                                         </Typography>
                                     </ListItemText>
                                 </ListItemButton>
                             </ListItem>
                         </List>
-                    </Box>
-                    <Divider textAlign="right">
-                        <IconButton onClick={() => setExpandedState(!expanded)}>
-                            <ArrowBackIosNewOutlined />
-                        </IconButton>
-                    </Divider>
-                    <Box className="sidebar-bottom">
+                        <Divider>
+                        </Divider>
                         <Stack direction={"row"} justifyContent={"space-around"} alignItems={"center"}>
-                            <Typography variant="body2">
+                            <Typography variant="caption">
                                 Categories
                             </Typography>
-                            <IconButton>
+                            <IconButton size="small">
                                 <AddBoxOutlined />
                             </IconButton>
                         </Stack>
@@ -64,7 +62,7 @@ const SideBar = () => {
                                     <ListItem disablePadding sx={hoverProperties}>
                                         <ListItemButton >
                                             <ListItemText>
-                                                <Typography variant="body1" color={theme.typography.h1.color} fontWeight={600}>
+                                                <Typography variant="subtitle2" color={theme.typography.h1.color} fontWeight={600}>
                                                     {category}
                                                 </Typography>
                                             </ListItemText>
@@ -77,13 +75,8 @@ const SideBar = () => {
                             })}
                         </List>
                     </Box>
-                </Box>
-                ) : (
-                        <IconButton onClick={() => setExpandedState(!expanded)}>
-                            <ArrowForwardIosOutlined/>
-                        </IconButton>
-                )}
-            
+                </Drawer>
+            </Box>
         </>
     )
 }

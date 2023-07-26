@@ -27,7 +27,7 @@ const theme = createTheme({
             color: "#26282E",
             fontWeight: "bold"
         },
-        subtitle1: {
+        subtitle2: {
             color: "#26282E",
             fontWeight: "bold"
         },
@@ -35,6 +35,9 @@ const theme = createTheme({
             color: "#B0BCCE"
         },
         body2: {
+            color: "#BBC6D7"
+        },
+        caption: {
             color: "#BBC6D7"
         }
     },

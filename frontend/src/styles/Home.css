@@ -1,3 +1,8 @@
 .content {
-    height: 80vh;
+    display: flex;
+    height: 100vh;
+}
+
+.task-content {
+    padding: 2rem;
 }
