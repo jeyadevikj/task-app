@@ -2,21 +2,35 @@ import { AddBoxOutlined, HomeOutlined, MoreHorizOutlined, PermIdentity } from "@
 import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material"
 import "../styles/SideBar.css"
 import theme from "../theme"
+import { useState } from "react"
 
-const SideBar = ({ expanded }) => {
-    const categories = ['Home', 'Project 1', 'Project 2']
+const SideBar = ({ categories, handleCategoryClick, handleAllTasks }) => {
+    // const categories = ['Home', 'Project 1', 'Project 2']
+    const [selectedCategory, setSelectedCategory] = useState("All")
     const hoverProperties = {
         "&:hover": {
             backgroundColor: theme.palette.selected.main
         },
     }
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category)
+        if(category === "All") {
+            handleAllTasks()
+        } else {
+            handleCategoryClick(category)
+        }
+    }
+
+
     return (
         <>
             <Box className="sidebar">
                 <Drawer variant="permanent" sx={{
                     [`& .MuiDrawer-paper`]: {
-                        width: '18vw',
+                        minWidth: '14vw',
                         position: "relative",
+                        borderRight: "0px solid"
                     }
                 }}>
                     <Box>
@@ -48,27 +62,30 @@ const SideBar = ({ expanded }) => {
                         </List>
                         <Divider>
                         </Divider>
-                        <Stack direction={"row"} justifyContent={"space-around"} alignItems={"center"}>
+                        <Stack direction={"row"} alignItems={"center"} p={1}>
                             <Typography variant="caption">
                                 Categories
                             </Typography>
-                            <IconButton size="small">
-                                <AddBoxOutlined />
-                            </IconButton>
                         </Stack>
                         <List>
-                            {categories.map((category) => {
+                            <ListItem disablePadding sx={{hoverProperties, backgroundColor: selectedCategory === "All" ? theme.palette.selected.main : {}}}>
+                                <ListItemButton onClick={() => handleCategorySelect("All")}>
+                                    <ListItemText>
+                                        <Typography variant="subtitle2" color={theme.typography.h1.color} fontWeight={600}>
+                                            All
+                                        </Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                            {categories?.map((category) => {
                                 return (
-                                    <ListItem disablePadding sx={hoverProperties}>
-                                        <ListItemButton >
+                                    <ListItem disablePadding sx={{hoverProperties, backgroundColor: selectedCategory === category ? theme.palette.selected.main : {}}}>
+                                        <ListItemButton onClick={() => handleCategorySelect(category)}>
                                             <ListItemText>
                                                 <Typography variant="subtitle2" color={theme.typography.h1.color} fontWeight={600}>
                                                     {category}
                                                 </Typography>
                                             </ListItemText>
-                                            <IconButton>
-                                                <MoreHorizOutlined />
-                                            </IconButton>
                                         </ListItemButton>
                                     </ListItem>
                                 )

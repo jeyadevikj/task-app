@@ -46,11 +46,24 @@ const theme = createTheme({
             main: "#2B47E8",
             contrastText: "#ffffff" // Replace with your desired primary color
         },
+        secondary: {
+            main: "#d32f2f",
+            contrastText: "ffffff"
+        },
         selected: {
             main: "#EFF2F6", // Replace with your desired background color for selected items
         },
         outline: {
             main: "#BBC6D7"
+        },
+        priority: {
+            main: "#d32f2f"
+        },
+        warning: {
+            main: "#ff9800"
+        },
+        success: {
+            main: "#43a047"
         }
     },
     components: {
@@ -65,9 +78,25 @@ const theme = createTheme({
                         }
                     }
                 })
-            }
+            },
         }
     }
 })
+
+theme.components.MuiButton.variants = [
+    {
+        props: {
+            variant: 'delete'
+        },
+        style: {
+            color: theme.palette.secondary.main,
+            ':hover': {
+                backgroundColor: theme.palette.secondary.main,
+                color: theme.palette.secondary.contrastText,
+                transition: '500ms'
+            }
+        }
+    }
+]
 
 export default theme;

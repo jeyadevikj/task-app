@@ -1,8 +1,31 @@
 .content {
     display: flex;
-    height: 100vh;
 }
 
 .task-content {
     padding: 2rem;
+    width: 100%;
+}
+
+.filters {
+    display: flex;
+    padding: 0;
+}
+
+.btn {
+    border-radius: 4rem !important;
+    text-transform: none !important;
+}
+
+.add-btn {
+    padding: 0.8rem 1rem !important;
+}
+
+.filter-item {
+    white-space: nowrap;
+}
+
+.filter-btn:hover{
+    background-color: #EFF2F6;
+    border-radius: 4rem;
 }

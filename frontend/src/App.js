@@ -12,7 +12,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <SnackbarProvider maxSnack={3} autoHideDuration={3000} anchorOrigin={{ vertical: "bottom", horizontal: 'center' }}>
+        <SnackbarProvider maxSnack={1} autoHideDuration={3000} anchorOrigin={{ vertical: "bottom", horizontal: 'center' }}>
           <BrowserRouter>
             <Routes>
               <Route exact path='/' element={<Home />} />

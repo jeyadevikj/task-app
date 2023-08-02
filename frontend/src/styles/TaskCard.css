@@ -1,3 +1,13 @@
 .card {
-    width: 12rem;
+    height: 100%;
+    width: 14rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.action-btn {
+    border-radius: 4rem !important;
+    padding: 0.5rem !important;
+    text-transform: none !important;
 }
