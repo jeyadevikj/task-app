@@ -118,7 +118,7 @@ const Home = () => {
                                 Have a look at your tasks.
                             </Typography>
                         </Stack>
-                        <Button variant="contained" startIcon={<AddCircleOutlined/>} className="btn add-btn">
+                        <Button variant="contained" startIcon={<AddCircleOutlined />} className="btn add-btn">
                             New Task
                         </Button>
                     </Stack>
@@ -170,10 +170,10 @@ const Home = () => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={3} padding={2}>
-                        {filteredTasks?.map((task, index) => {
-                            console.log(task);
+                        {console.log(filteredTasks)}
+                        {filteredTasks?.map((task) => {
                             return (
-                                <Grid item key={index}>
+                                <Grid item key={task._id}>
                                     <TaskCard item={task} />
                                 </Grid>
                             )

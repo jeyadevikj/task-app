@@ -1,8 +1,8 @@
-import { AddBoxOutlined, HomeOutlined, MoreHorizOutlined, PermIdentity } from "@mui/icons-material"
-import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material"
+import { HomeOutlined, PermIdentity } from "@mui/icons-material"
+import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material"
+import { useState } from "react"
 import "../styles/SideBar.css"
 import theme from "../theme"
-import { useState } from "react"
 
 const SideBar = ({ categories, handleCategoryClick, handleAllTasks }) => {
     // const categories = ['Home', 'Project 1', 'Project 2']
@@ -77,9 +77,9 @@ const SideBar = ({ categories, handleCategoryClick, handleAllTasks }) => {
                                     </ListItemText>
                                 </ListItemButton>
                             </ListItem>
-                            {categories?.map((category) => {
+                            {categories?.map((category, index) => {
                                 return (
-                                    <ListItem disablePadding sx={{hoverProperties, backgroundColor: selectedCategory === category ? theme.palette.selected.main : {}}}>
+                                    <ListItem disablePadding sx={{hoverProperties, backgroundColor: selectedCategory === category ? theme.palette.selected.main : {}}} key={index}>
                                         <ListItemButton onClick={() => handleCategorySelect(category)}>
                                             <ListItemText>
                                                 <Typography variant="subtitle2" color={theme.typography.h1.color} fontWeight={600}>

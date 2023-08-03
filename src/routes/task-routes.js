@@ -53,7 +53,7 @@ taskRouter.patch("/tasks/:id", auth ,async (req, res) => {
 
   const updates = req.body;
   const updatesPassed = Object.keys(updates);
-  const allowedUpdates = ["description", "completed", "email"];
+  const allowedUpdates = ["title", "description", "completed", "hasPriority", "colName"];
   const isUpdateValid = updatesPassed.every((update) =>
     allowedUpdates.includes(update)
   );
