@@ -4,6 +4,7 @@ import { useState } from "react"
 import "../styles/TaskCard.css"
 import theme from "../theme"
 import UpdateTaskDialog from "./dialogs/UpdateTaskDialog"
+import DeleteTaskDialog from "./dialogs/DeleteTaskDialog"
 
 const TaskCard = ({ item }) => {
     const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
@@ -66,6 +67,7 @@ const TaskCard = ({ item }) => {
             </CardActions>
 
             <UpdateTaskDialog openState={updateDialogOpen} onCloseDialog={handleUpdateDialogClose} task={item}/>
+            <DeleteTaskDialog openState={deleteDialoagOpen} onCloseDialog={handleDeleteDialogClose} task={item}/>
         </Card>
     )
 }
