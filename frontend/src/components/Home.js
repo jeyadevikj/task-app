@@ -10,6 +10,7 @@ import Footer from "./Footer"
 import Header from "./Header"
 import SideBar from "./SideBar"
 import TaskCard from "./TaskCard"
+import AddTaskDialog from "./dialogs/AddTaskDialog"
 const Home = () => {
     const navigate = useNavigate()
     const [tasks, setTasks] = useState([])
@@ -19,6 +20,7 @@ const Home = () => {
     const [categories, setCategories] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
     const [selectedFilter, setSelectedFilter] = useState("All")
+    const [addDialogOpen, setAddDialogOpen] = useState(false)   
     useEffect(() => {
         const fetchUserObj = async () => {
             const userObj = JSON.parse(localStorage.getItem('user'))
@@ -75,6 +77,12 @@ const Home = () => {
                 variant: "error",
                 preventDuplicate: true
             })
+            if(error.response.status === 403) {
+                if(user) {
+                    localStorage.removeItem('user')
+                }
+                navigate('/login')
+            }
         }
     }
 
@@ -103,6 +111,14 @@ const Home = () => {
         }
     }
 
+    const handleAddBtnClick = () => {
+        setAddDialogOpen(true)
+    }
+
+    const handleAddDialogClose = () => {
+        setAddDialogOpen(false)
+    }
+
     return (
         <>
             <Header />
@@ -118,7 +134,7 @@ const Home = () => {
                                 Have a look at your tasks.
                             </Typography>
                         </Stack>
-                        <Button variant="contained" startIcon={<AddCircleOutlined />} className="btn add-btn">
+                        <Button variant="contained" startIcon={<AddCircleOutlined />} className="btn add-btn" onClick={() => handleAddBtnClick()}>
                             New Task
                         </Button>
                     </Stack>
@@ -183,6 +199,8 @@ const Home = () => {
                 </Box>
             </Box>
             <Footer />
+
+            <AddTaskDialog openState={addDialogOpen} onCloseDialog={handleAddDialogClose}/>
         </>
     )
 }

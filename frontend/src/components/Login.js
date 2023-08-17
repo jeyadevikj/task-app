@@ -1,11 +1,12 @@
 import { KeyboardArrowRightSharp } from "@mui/icons-material"
 import { Button, Stack, TextField, Typography } from "@mui/material"
 import { enqueueSnackbar } from "notistack"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axiosApi from "../api/axiosApi"
 import "../styles/Login.css"
 import Footer from "./Footer"
 import Header from "./Header"
+import theme from "../theme"
 
 
 
@@ -53,6 +54,9 @@ const Login = () => {
                     <Button type="submit" variant="contained" fullWidth={true} sx={{ textTransform: "none" }} endIcon={<KeyboardArrowRightSharp />}>
                         Login to RxTasks
                     </Button>
+                    <Typography variant="body2" color={theme.typography.h1.color}>
+                        New to RxTasks? <Link to="/register" className="redirect-link">Register here</Link>
+                    </Typography>
                 </Stack>
             </form>
             <Footer />
