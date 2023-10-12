@@ -1,5 +1,5 @@
 const config = {
-    endpoint: "http://localhost:8080"
+    endpoint: "http://3.132.210.88/8081/"
 }
 
 export default config
